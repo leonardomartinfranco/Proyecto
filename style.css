@@ -1,0 +1,33 @@
+*{
+    padding: 0;
+    margin:10px;
+}
+
+#personajes{
+    display: flex;  
+    justify-content: center;
+    flex-wrap:wrap ;
+    gap:5px;
+    border: 0px solid black;
+    width: 100%;
+}
+
+.personaje{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid black;
+    
+    margin:5px;
+    width:347px;
+    height: 273px;
+    border-radius: 10px;
+    background: #512051;
+    padding: 35px;
+    color:white
+}
+
+.personaje img{
+    width:150px;
+    height:150px;
+}
