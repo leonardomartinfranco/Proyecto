@@ -1,0 +1,22 @@
+
+@media (max-width: 800px) {
+   .boton{
+        display:none;
+   }   
+   footer{
+    flex-direction: column;
+    height: 100px;
+   }
+
+   footer div{
+    gap:5px;
+    height: 10px;
+   }
+   .paginado{
+    height: 10px;
+    gap:5px; 
+   }
+   .botonPaginado{ 
+    height: 25px;
+   }
+}

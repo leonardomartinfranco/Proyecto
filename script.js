@@ -1,9 +1,13 @@
 
+let divTotalPersonajes = document.getElementById('totalPersonajes');
 let divCajaPersonajes = document.getElementById('personajes');
 //Filtros
 let botonFiltroTodo = document.getElementById("filtroTodo");
 let botonFiltroMujer = document.getElementById("filtroMujer");
 let botonFiltroHombre = document.getElementById("filtroHombre");
+let botonFiltroSinGenero = document.getElementById("filtroSinGenero");
+let botonFiltroDesconocido = document.getElementById("filtroDesconocido");
+
 let totalPersonajes;
 let paginaActual=1;
 let totalPaginas=1;
@@ -17,16 +21,38 @@ let etiquetaPaginaActual=document.getElementById('paginaActual');
 
 //funcion para mostrar los personajes en el html
 function mostrarenelHtml(arrPersonajes){
-    etiquetaPaginaActual.innerHTML="Página actual: "+paginaActual
+    divTotalPersonajes.innerHTML="Total de personajes: "+arrPersonajes.length;
+    etiquetaPaginaActual.innerHTML="Página actual: "+paginaActual;
     divCajaPersonajes.innerHTML="";
+    
     arrPersonajes.forEach((itemPersonaje) => {
+
+        // divCajaPersonajes.innerHTML+=`
+        // <div class="personaje">
+        //     <h2>Nombre: ${itemPersonaje.name}</h2>
+        //     <p>Genero: ${itemPersonaje.gender}</p>
+        //     <img src="${itemPersonaje.image}" alt="${itemPersonaje.name}"/>
+        // </div>
+        // ` ;
+
         divCajaPersonajes.innerHTML+=`
         <div class="personaje">
-            <h2>Nombre: ${itemPersonaje.name}</h2>
-            <p>Genero: ${itemPersonaje.gender}</p>
-            <img src="${itemPersonaje.image}" alt="${itemPersonaje.name}"/>
+        <div class="imagen">
+             <img src="${itemPersonaje.image}" alt="${itemPersonaje.name}">
         </div>
-        ` ;
+        <div class="datos">
+            <h2>Nombre: ${itemPersonaje.name}</h2>
+            <p>Especie: ${itemPersonaje.species}</p>
+            <p>Genero: ${itemPersonaje.gender}</p>
+            <p>Estado: ${itemPersonaje.status}</p>
+            <p>Origen: ${itemPersonaje.origin.name}</p>
+            <p>Ubicación: ${itemPersonaje.location.name}</p>  
+        </div>
+        <div class="accion"> 
+             <button class="mas" href="${itemPersonaje.origin.url}">Ver más</button>
+        </div>
+        </div>` ;
+
     });
 };
 
@@ -63,10 +89,16 @@ pedidoFetch(paginaActual);
 
 // funciones para el fitro 
 function filtraPersonajes(gender){
-    let PersonajesFiltro=totalPersonajes.filter((itemPersonaje)=>{
-        return itemPersonaje.gender===gender;
-        }); 
-        mostrarenelHtml(PersonajesFiltro);
+    if (gender==''){ 
+        mostrarenelHtml(totalPersonajes);
+    }
+    else{
+        let PersonajesFiltro=totalPersonajes.filter((itemPersonaje)=>{
+            console.log(itemPersonaje.gender);
+            return itemPersonaje.gender===gender;
+            }); 
+            mostrarenelHtml(PersonajesFiltro);
+    }
 }
 
 function filtrarMujer(){
@@ -78,8 +110,18 @@ function filtrarHombre(){
 }
 
 
+function filtrarSinGenero(){
+    filtraPersonajes('Genderless');
+}
+
+
+function filtrarDesconocido(){
+    filtraPersonajes('unknown');
+}
+
 function filtrarTodo(){
-    mostrarenelHtml(totalPersonajes);
+    filtraPersonajes('');
+    
 }
 
 
@@ -113,6 +155,8 @@ function ultimaPagina(){
 
  botonFiltroMujer.addEventListener('click',filtrarMujer);
  botonFiltroHombre.addEventListener('click',filtrarHombre);
+ botonFiltroSinGenero.addEventListener('click',filtrarSinGenero);
+ botonFiltroDesconocido.addEventListener('click',filtrarDesconocido);
  botonFiltroTodo.addEventListener('click',filtrarTodo);
 
  botonPaginaPrincial.addEventListener('click',primerPagina);

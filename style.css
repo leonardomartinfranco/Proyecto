@@ -1,6 +1,6 @@
 *{
     padding: 0;
-    margin:10px;
+    margin:0;
 }
 
 #personajes{
@@ -12,22 +12,148 @@
     width: 100%;
 }
 
-.personaje{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border: 2px solid black;
-    
-    margin:5px;
-    width:347px;
-    height: 273px;
-    border-radius: 10px;
-    background: #512051;
-    padding: 35px;
-    color:white
+#totalPersonajes{
+    position: fixed;
+    width: 100%;
+    height: 25px;
+    top: 60px;
+    background-color: rgba(0, 0, 0, 0.788);
+    color:white;
+    display: flex; 
+    padding:7px;
+    z-index: 99999;
+}
+.vacio{
+    height: 100px;
 }
 
+nav{
+    background-color: black;
+    color:white;
+    
+    display: flex; 
+    padding:7px;
+
+    /* posicionamiento  */
+    position: fixed;    
+    width: 99%;
+    z-index: 99999;
+} 
+
+.filtros{
+    display: flex;
+    flex-grow: 1;
+    justify-content:flex-end  ;
+    align-items: center; 
+    gap: 10px;
+    /*border-color: aliceblue;
+    border-width: 5px; 
+    border-style: solid; */
+} 
+
+footer{
+    background-color: rgba(73, 71, 71, 0.967);
+    color:white;
+    display: flex;  
+    justify-content:center  ;
+    align-items: center;  
+
+    gap:25px;
+    padding:7px;
+    /* posicionamiento  */
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 99999;
+}
+
+.boton{
+    width:100px;
+    height: 50%;
+    color: rgb(255, 255, 255);
+    background-color: black;
+    border-width: 0px 0px 0px 1px;
+}
+
+.boton:hover{
+    background-color: rgb(255, 253, 253);
+    color:black;
+
+}
+
+.boton:focus{
+    background-color: rgb(219, 142, 26);
+    color:rgb(107, 69, 12);
+}
+
+.botonPaginado{
+    width:50px;
+    height: 100%;
+    color: black;
+}
+
+.mas{
+    width:100%;
+    height: 70%;
+    color: rgb(255, 255, 255);
+    background-color:  #381738;
+    border-width: 0px 0px 0px 0px;
+}
+
+.mas:hover{
+    color: #381738;
+    background-color:  white;
+    border-width: 0px 0px 0px 0px;
+}
+
+.paginado{
+    display: flex; 
+    justify-content:center  ;
+    align-items: center; 
+    gap: 10px;
+}
+
+
+.personaje{
+    display: flex; 
+    flex-direction: column;
+    border: 2px solid black;
+    overflow: hidden;
+    margin:5px;
+    width:347px;
+    /* height: 673px; */
+    border-radius: 10px;
+    background: #512051;
+    padding: 0px;
+    color:white;
+    z-index:0;
+}
+ 
+.personaje:hover{
+    box-shadow: 7px 7px 7px 7px rgba(0, 0, 0, 0.2);
+     
+}
 .personaje img{
-    width:150px;
-    height:150px;
+    position: relative;
+    margin: 3px;
+    border-radius: 10px 10px 0px 0px;
+    width:98.5%; 
+    transition: 0.5s;
+    object-fit: cover;
+}
+
+.imagen:hover{
+    transform: scale(1.2);
+}
+
+.datos{
+    padding: 15px;
+}
+
+.accion{ 
+    padding: 15px;
+}
+.accion a{
+    z-index:2;
+    color:red;
 }
