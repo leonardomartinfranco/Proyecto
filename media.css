@@ -11,7 +11,7 @@
    .menu-nav{ 
       position: fixed;
       top: 70px;
-      left: 0;
+      left: -10px;
       height: 100vh;
       width: 100%;
       margin-left: -100%; 
