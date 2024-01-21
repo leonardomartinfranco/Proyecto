@@ -1,3 +1,6 @@
+// para menu hamburguesa
+const toggleButton = document.getElementById('boton-menu')
+const navWrapper = document.getElementById('nav')
 
 let divTotalPersonajes = document.getElementById('totalPersonajes');
 let divCajaPersonajes = document.getElementById('personajes');
@@ -56,13 +59,16 @@ function mostrarenelHtml(arrPersonajes){
 
     });
 };
-
+// deshabilito los botones , luego se ira habilitando segun corresponda
 botonPaginaPrincial.disabled=true;
 botonAnterior.disabled=true;
 botonSiguiente.disabled=true;
 botonUltimaPagina.disabled=true;
 
 //pedidos de info con fech
+// aqui consumimos los datos del API que luego se guardaran en el arreglo
+// totalPaginas para poder ser filtrados cuando el usuario lo solicite.
+
 function pedidoFetch(pagina){
     fetch('https://rickandmortyapi.com/api/character/?page='+pagina)
     .then((data)=>{
@@ -71,7 +77,7 @@ function pedidoFetch(pagina){
     }).then((data)=>{
         console.log(data);
         totalPaginas=data.info.pages;
-        TextIrA.value=0;
+        TextIrA.value="";
         botonPaginaPrincial.disabled=pagina==1;
         botonAnterior.disabled=pagina===1;
         botonSiguiente.disabled=totalPaginas===pagina;
@@ -82,13 +88,12 @@ function pedidoFetch(pagina){
     })
 }
 pedidoFetch(paginaActual);
-
-//eventos
-// 1- traer elemento al que queremos agregar evento.
-// 2- crear funcion que se ejecute cuando se dispare el evento.
-// 3- creamos el evento, conectando todo
+ 
 
 // funciones para el fitro 
+// esta funcion asume que ya tenemos el arreglo totalPersonajes 
+// y le aplica el filtro deseado
+
 function filtraPersonajes(gender){
     if (gender==''){ 
         mostrarenelHtml(totalPersonajes);
@@ -100,8 +105,12 @@ function filtraPersonajes(gender){
             }); 
             mostrarenelHtml(PersonajesFiltro);
     }
+    // para la hamburguesa luego de consultar directamente oculto el menu
+    navWrapper.classList.remove('show')
+    toggleButton.classList.remove('close')
 }
 
+// aplicando filtros por genero
 function filtrarMujer(){
     filtraPersonajes('Female'); 
 }
@@ -121,11 +130,11 @@ function filtrarDesconocido(){
 }
 
 function filtrarTodo(){
-    filtraPersonajes('');
-    
+    filtraPersonajes('');    
 }
 
 
+// consultando datos de la pagina deseada
 function primerPagina(){
     paginaActual=1;
     pedidoFetch(paginaActual)
@@ -151,29 +160,46 @@ function ultimaPagina(){
     paginaActual=totalPaginas;
     pedidoFetch(paginaActual)
 };
- //crear evento
- //evenotHTML.addEventListener('tipo de evento','funcion a llamar')
+ 
 
+function irAPagina(){
+   paginaActual=parseInt(TextIrA.value) ;
+   if (paginaActual>=totalPaginas){
+       paginaActual=totalPaginas;
+   }
+   if (paginaActual<0){
+       paginaActual=1;
+   } 
+   pedidoFetch(paginaActual)
+}
+
+// vinculo cada evento a los botones de filtro
  botonFiltroMujer.addEventListener('click',filtrarMujer);
  botonFiltroHombre.addEventListener('click',filtrarHombre);
  botonFiltroSinGenero.addEventListener('click',filtrarSinGenero);
  botonFiltroDesconocido.addEventListener('click',filtrarDesconocido);
  botonFiltroTodo.addEventListener('click',filtrarTodo);
 
+ // vinculo cada evento a los botones de paginado
  botonPaginaPrincial.addEventListener('click',primerPagina);
  botonAnterior.addEventListener('click',anteriorPagina);
  botonSiguiente.addEventListener('click',siguientePagina);
  botonUltimaPagina.addEventListener('click',ultimaPagina);
- 
-function irAPagina(){
-    paginaActual=parseInt(TextIrA.value) ;
-    if (paginaActual>=totalPaginas){
-        paginaActual=totalPaginas;
-    }
-    if (paginaActual<0){
-        paginaActual=1;
-    }
-    console.log(paginaActual);
-    pedidoFetch(paginaActual)
-}
-TextIrA.addEventListener('focusout',irAPagina)
+ TextIrA.addEventListener('change',irAPagina) 
+
+
+// para la hamburguesa 
+// este evento controla el click de la misma haciendo que el menu
+// aparezca o desaparezca segun corresponda.
+toggleButton.addEventListener('click',() => {
+  toggleButton.classList.toggle('close')
+  navWrapper.classList.toggle('show')
+})
+
+navWrapper.addEventListener('click',e => {
+   if(e.target.id === 'nav'){ 
+    navWrapper.classList.remove('show')
+    toggleButton.classList.remove('close')
+  }
+})
+

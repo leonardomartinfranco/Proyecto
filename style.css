@@ -11,7 +11,10 @@
     border: 0px solid black;
     width: 100%;
 }
-
+h1{
+    padding: 10px;
+    font-size: 1.5em;
+}
 #totalPersonajes{
     position: fixed;
     width: 100%;
@@ -34,21 +37,47 @@ nav{
     display: flex; 
     padding:7px;
 
-    /* posicionamiento  */
+    /* posicionamiento  
+    position: fixed;    
+    width: 99%;
+    z-index: 99999;*/
+} 
+
+.menu-header{ 
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color:white;
+    padding: 0px;  
     position: fixed;    
     width: 99%;
     z-index: 99999;
-} 
+
+}
+.menu-nav{ 
+    top: 0;
+    left: 0;
+    height: 40px; 
+    margin-left: -100%; 
+    background-color: rgba(0,0,0,.7);
+    z-index: 100;
+  }
+
+.menu-nav.show{
+    margin-left: 0;
+}
+ 
+
+ 
 
 .filtros{
     display: flex;
     flex-grow: 1;
     justify-content:flex-end  ;
     align-items: center; 
-    gap: 10px;
-    /*border-color: aliceblue;
-    border-width: 5px; 
-    border-style: solid; */
+    gap: 10px; 
 } 
 
 footer{
@@ -70,7 +99,7 @@ footer{
 
 .boton{
     width:100px;
-    height: 50%;
+    height: 100%;
     color: rgb(255, 255, 255);
     background-color: black;
     border-width: 0px 0px 0px 1px;
@@ -86,6 +115,21 @@ footer{
     background-color: rgb(219, 142, 26);
     color:rgb(107, 69, 12);
 }
+
+
+.boton::after {
+    position: absolute;
+    content: "";
+    background-color: black;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 3px; 
+  }
+  
+  .boton:hover::after {
+    width: 50%;
+  }
 
 .botonPaginado{
     width:50px;
@@ -163,3 +207,46 @@ footer{
     width: 60px;
     
 }
+ 
+
+.boton-menu{
+    z-index: 200;
+    width: 40px;
+    height: 40px;
+    border: none;
+    display: flex;
+    background: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    display:none;
+    margin: 10px;
+  }
+  
+  .boton-menu span{
+    width: 37px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    background: #444444;
+    background: white;
+    color:white;
+    border-radius: 3px;
+    transform-origin: 4px 0px; 
+  }
+  
+  .boton-menu.close span {
+    opacity: 1;
+    transform: rotate(45deg) translate(0px, 0px);
+    background: #ffffff;
+  }
+  
+  .boton-menu.close span:nth-child(2){
+    transform: rotate(-45deg) translate(-8px, 5px);
+  }
+  
+  .boton-menu.close span:nth-child(3){
+    display: none;
+  }
+  

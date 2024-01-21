@@ -8,22 +8,27 @@
     <link rel="stylesheet" href="media.css">
 </head>
 <body>
-    <nav>
+    <header class="menu-header">
         <div>
             <h1>Rick and Morty</h1>
-        </div>
-        <div class="filtros">
-            <button class="boton" id="filtroTodo" type="button">Todos</button>
-            <button class="boton" id="filtroMujer" type="button">Mujeres</button>
-            <button class="boton" id="filtroHombre" type="button">Hombres</button>
-            <button class="boton" id="filtroSinGenero" type="button">Sin genero</button>
-            <button class="boton" id="filtroDesconocido" type="button">Desconocido</button> 
-        </div>
-    </nav>
-    <div id="totalPersonajes">Total de personajes:</div>
+        </div>  
+        <nav id="nav" class="menu-nav">
+            <div class="filtros">
+                <button class="boton" id="filtroTodo" type="button">Todos</button>
+                <button class="boton" id="filtroMujer" type="button">Mujeres</button>
+                <button class="boton" id="filtroHombre" type="button">Hombres</button>
+                <button class="boton" id="filtroSinGenero" type="button">Sin genero</button>
+                <button class="boton" id="filtroDesconocido" type="button">Desconocido</button> 
+            </div>
+        </nav> 
+        <button id="boton-menu" class="boton-menu" >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>  
+        <div id="totalPersonajes">Total de personajes:</div>
+    </header>
     <div class="vacio"></div>
-     
-
     <div id="personajes">
         <!-- <div class="personaje">
             <div class="imagen">
@@ -50,7 +55,7 @@
         <div class="paginado">
             <button class="botonPaginado" id="primerPagina"><<</button>
             <button class="botonPaginado" id="anterior"><</button>
-            <input id="irA"></input>
+            <input id="irA" type="number" min="0" step="1"></input>
             <button class="botonPaginado" id="siguiente">></button>
             <button class="botonPaginado" id="ultimaPagina">>></button>            
         </div>  
