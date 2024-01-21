@@ -18,6 +18,7 @@ let botonAnterior=document.getElementById('anterior');
 let botonSiguiente=document.getElementById('siguiente');
 let botonUltimaPagina=document.getElementById('ultimaPagina');
 let etiquetaPaginaActual=document.getElementById('paginaActual');
+let TextIrA=document.getElementById('irA');
 
 //funcion para mostrar los personajes en el html
 function mostrarenelHtml(arrPersonajes){
@@ -70,7 +71,7 @@ function pedidoFetch(pagina){
     }).then((data)=>{
         console.log(data);
         totalPaginas=data.info.pages;
-
+        TextIrA.value=0;
         botonPaginaPrincial.disabled=pagina==1;
         botonAnterior.disabled=pagina===1;
         botonSiguiente.disabled=totalPaginas===pagina;
@@ -140,8 +141,8 @@ function anteriorPagina(){
 
 function siguientePagina(){
     paginaActual++;
-    if (paginaActual>=totalPersonajes){
-        paginaActual=totalPersonajes
+    if (paginaActual>=totalPaginas){
+        paginaActual=totalPaginas;
     }
     pedidoFetch(paginaActual)
 };
@@ -164,4 +165,15 @@ function ultimaPagina(){
  botonSiguiente.addEventListener('click',siguientePagina);
  botonUltimaPagina.addEventListener('click',ultimaPagina);
  
-
+function irAPagina(){
+    paginaActual=parseInt(TextIrA.value) ;
+    if (paginaActual>=totalPaginas){
+        paginaActual=totalPaginas;
+    }
+    if (paginaActual<0){
+        paginaActual=1;
+    }
+    console.log(paginaActual);
+    pedidoFetch(paginaActual)
+}
+TextIrA.addEventListener('focusout',irAPagina)

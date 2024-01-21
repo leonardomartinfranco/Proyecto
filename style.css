@@ -58,6 +58,7 @@ footer{
     justify-content:center  ;
     align-items: center;  
 
+    flex-direction: column;
     gap:25px;
     padding:7px;
     /* posicionamiento  */
@@ -156,4 +157,9 @@ footer{
 .accion a{
     z-index:2;
     color:red;
+}
+
+#irA{
+    width: 60px;
+    
 }
